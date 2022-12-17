@@ -41,6 +41,7 @@
 
 
 **[Blog project]** is built using ruby on rails and following this ERD.
+![image](https://user-images.githubusercontent.com/22921170/208265293-7149090e-faa0-4809-87eb-286b03d4b800.png)
 
 
 
