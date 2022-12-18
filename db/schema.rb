@@ -37,8 +37,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_201928) do
     t.decimal "LikesCounter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "like_id", null: false
-    t.bigint "comment_id", null: false
+    t.bigint "like_id"
+    t.bigint "comment_id"
     t.index ["comment_id"], name: "index_posts_on_comment_id"
     t.index ["like_id"], name: "index_posts_on_like_id"
   end
@@ -50,9 +50,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_201928) do
     t.decimal "PostsCounter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "post_id", null: false
-    t.bigint "comment_id", null: false
-    t.bigint "like_id", null: false
+    t.bigint "post_id"
+    t.bigint "comment_id"
+    t.bigint "like_id"
     t.index ["comment_id"], name: "index_users_on_comment_id"
     t.index ["like_id"], name: "index_users_on_like_id"
     t.index ["post_id"], name: "index_users_on_post_id"
