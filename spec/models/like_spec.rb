@@ -36,5 +36,4 @@ RSpec.describe Like, type: :model do
     like.post = post
     expect(like).to be_valid
   end
-
 end

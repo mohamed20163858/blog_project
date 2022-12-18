@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
       name: 'Mateo Lane',
       photo: 'https://unsplash.com/photos/mateopic',
       bio: 'Comedian, Italian, stylish, and part time youtuber',
-      posts_counter: 5,
+      posts_counter: 5
     )
   end
 
