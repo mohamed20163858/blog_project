@@ -15,26 +15,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_201928) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.decimal "AuthorId"
-    t.decimal "PostId"
-    t.text "Text"
+    t.integer "author_id"
+    t.integer "post_id"
+    t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "likes", force: :cascade do |t|
-    t.decimal "AuthorId"
-    t.decimal "PostId"
+    t.integer "author_id"
+    t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.decimal "AuthorId"
-    t.string "Title"
-    t.text "Text"
-    t.decimal "CommentsCounter"
-    t.decimal "LikesCounter"
+    t.integer "author_id"
+    t.string "title"
+    t.text "text"
+    t.integer "comments_counter"
+    t.integer "likes_counter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "like_id"
@@ -44,10 +44,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_17_201928) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "Name"
-    t.string "Photo"
-    t.string "Bio"
-    t.decimal "PostsCounter"
+    t.string "name"
+    t.string "photo"
+    t.string "bio"
+    t.integer "posts_counter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "post_id"
