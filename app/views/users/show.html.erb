@@ -1,3 +1,5 @@
+<% count = 0 %>
+<% index = 0 %>
 <% User.all.each do |user| %>
 <% if user.id == params[:id].to_i %>
 <div id="<%=params[:id]%>" class="card">
@@ -7,18 +9,40 @@
     <p>Number of posts: <%= user.posts_counter %></p>
   </div>
 </div>
-<div>
-  <h2>Post #1</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="posts">
+  <div class="bio">
+    <h2>Bio</h2>
+    <p><%= user.bio %></p>
+  </div>
+  <% Post.all.each_with_index do |post, i| %>
+  <% if user.id == post.author_id %>
+  <% if count < 2 %>
+  <div class="post" id="<%=post.id%>">
+  <% else %>
+  <div class="post hidden" id="<%=post.id%>">
+  <% end %>
+    <h2><%= post.title %></h2>
+    <p><%= post.text %></p>
+    <div class="reactions">
+      <p>Comments: <%= post.comments_counter %>, Likes: y </p>
+    </div>
+  </div>
+  <% count = count + 1 %>
+  <% index = i %>
+  <% end %>
+  <% end %>
+  <button onclick="seePostsFunction()">See all posts</button>
 </div>
-<div>
-  <h2>Post #2</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</div>
-<div>
-  <h2>Post #3</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</div>
-<button>See all posts</button>
 <% end %>
 <% end %>
+<script>
+  function seePostsFunction() {
+   const elements = document.querySelectorAll(".hidden");
+   for(let i =0; i<elements.length;++i) {
+    const element = elements[i];
+    element.classList.remove('hidden');
+   }
+   const button = document.querySelector('button');
+   button.remove();
+  }
+</script>

@@ -16,6 +16,7 @@
 
 * {
   box-sizing: border-box;
+  margin: 10px 20px;
 }
 
 .card {
@@ -40,4 +41,24 @@
 .card .img {
   width: 30vw;
   text-align: center;
+}
+
+.posts {
+  display: flex;
+  flex-direction: column;
+}
+
+.posts button {
+  width: fit-content;
+  align-self: center;
+  padding: 10px;
+}
+
+.bio,
+.post {
+  border: 3px solid black;
+}
+
+.hidden {
+  display: none;
 }
