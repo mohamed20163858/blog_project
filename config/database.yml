@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: blog_project
+  database: blog_project_db
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
