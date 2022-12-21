@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+* {
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.card .info {
+  border: 3px solid black;
+  width: 70vw;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card .info p {
+  align-self: flex-end;
+}
+
+.card .img {
+  width: 30vw;
+  text-align: center;
+}

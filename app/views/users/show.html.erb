@@ -1,9 +1,10 @@
-<h1>Show user number <%=params[:id]%></h1>
+<% User.all.each do |user| %>
+<% if user.id == params[:id].to_i %>
 <div id="<%=params[:id]%>" class="card">
-  <div class="img"><img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600"></div>
+  <div class="img"><%= image_tag "https://i.ibb.co/CP4m1b4/img.jpg", alt: "user-photo", height:150 %></div>
   <div class="info">
-    <h2>User name</h2>
-    <p>Number of posts: x</p>
+    <h2>User name: <%= user.name %></h2>
+    <p>Number of posts: <%= user.posts_counter %></p>
   </div>
 </div>
 <div>
@@ -19,3 +20,5 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </div>
 <button>See all posts</button>
+<% end %>
+<% end %>
