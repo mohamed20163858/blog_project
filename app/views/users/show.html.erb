@@ -1,5 +1,4 @@
-<% count = 0 %>
-<% index = 0 %>
+
 <% User.all.each do |user| %>
 <% if user.id == params[:id].to_i %>
 <div id="<%=params[:id]%>" class="card">
@@ -16,33 +15,19 @@
   </div>
   <% Post.all.each_with_index do |post, i| %>
   <% if user.id == post.author_id %>
-  <% if count < 2 %>
-  <div class="post" id="<%=post.id%>">
-  <% else %>
-  <div class="post hidden" id="<%=post.id%>">
-  <% end %>
+    <div class="post" id="<%=post.id%>">
     <h2><%= post.title %></h2>
     <p><%= post.text %></p>
-    <div class="reactions">
-      <p>Comments: <%= post.comments_counter %>, Likes: y </p>
+    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: y </p>
     </div>
-  </div>
-  <% count = count + 1 %>
-  <% index = i %>
   <% end %>
   <% end %>
-  <button onclick="seePostsFunction()">See all posts</button>
+  <button onclick="seePostsFunction(<%=user.id%>)">See all posts</button>
 </div>
 <% end %>
 <% end %>
 <script>
-  function seePostsFunction() {
-   const elements = document.querySelectorAll(".hidden");
-   for(let i =0; i<elements.length;++i) {
-    const element = elements[i];
-    element.classList.remove('hidden');
-   }
-   const button = document.querySelector('button');
-   button.remove();
+  function seePostsFunction(id) {
+     window.location.href = id+"/posts";
   }
 </script>

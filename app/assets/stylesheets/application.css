@@ -55,10 +55,17 @@
 }
 
 .bio,
-.post {
+.post,
+.comments {
   border: 3px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
   display: none;
+}
+
+.post .reactions {
+  align-self: flex-end;
 }
