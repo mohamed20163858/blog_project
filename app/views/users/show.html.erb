@@ -1,21 +1,33 @@
-<h1>Show user number <%=params[:id]%></h1>
+
+<% User.all.each do |user| %>
+<% if user.id == params[:id].to_i %>
 <div id="<%=params[:id]%>" class="card">
-  <div class="img"><img src="img_girl.jpg" alt="Girl in a jacket" width="500" height="600"></div>
+  <div class="img"><%= image_tag "https://i.ibb.co/CP4m1b4/img.jpg", alt: "user-photo", height:150 %></div>
   <div class="info">
-    <h2>User name</h2>
-    <p>Number of posts: x</p>
+    <h2>User name: <%= user.name %></h2>
+    <p>Number of posts: <%= user.posts_counter %></p>
   </div>
 </div>
-<div>
-  <h2>Post #1</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="posts">
+  <div class="bio">
+    <h2>Bio</h2>
+    <p><%= user.bio %></p>
+  </div>
+  <% Post.all.each_with_index do |post, i| %>
+  <% if user.id == post.author_id %>
+    <div class="post" id="<%=post.id%>">
+    <h2><%= post.title %></h2>
+    <p><%= post.text %></p>
+    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: y </p>
+    </div>
+  <% end %>
+  <% end %>
+  <button onclick="seePostsFunction(<%=user.id%>)">See all posts</button>
 </div>
-<div>
-  <h2>Post #2</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</div>
-<div>
-  <h2>Post #3</h2>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-</div>
-<button>See all posts</button>
+<% end %>
+<% end %>
+<script>
+  function seePostsFunction(id) {
+     window.location.href = id+"/posts";
+  }
+</script>
