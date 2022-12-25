@@ -7,8 +7,12 @@
   </div>
 </div>
 <% end %>
+<button onclick="createPostFunction()">Create post</button>
 <script>
 function redirectFunction (id) {
   window.location.href = "users/" + id;
 }
+function createPostFunction() {
+    window.location.href = "/posts/new"
+  }
 </script>

@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.author = current_user
     @post.save
-    redirect_to "/users/#{current_user.id}"
+    redirect_to "/users/#{current_user.id}/posts/#{@post.id}"
   end
 
   def post_params
