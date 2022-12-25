@@ -14,7 +14,7 @@
     <div class="post" id="<%=post.id%>">
     <h2><%= post.title %></h2>
     <p><%= post.text %></p>
-    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: y </p>
+    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p>
     </div>
     <div class="comments">
       <% Comment.all.each do |comment| %>

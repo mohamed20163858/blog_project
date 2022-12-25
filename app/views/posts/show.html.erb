@@ -1,8 +1,10 @@
 <% post = Post.find_by(id: params[:id])%>
+<% flash[:post_author_id] = post.author_id %>
+<% unless post.nil? %>
 <div class="post" id="<%=post.id%>">
     <h2><%= post.title %></h2>
     <p><%= post.text %></p>
-    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: y </p>
+    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %> </p>
     </div>
     <div class="comments">
       <% Comment.all.each do |comment| %>
@@ -11,3 +13,9 @@
       <% end %>
       <% end %>
 </div>
+<%= render 'forms/comment', comment: @comment %>
+<% like = Like.find_by(author_id: @user.id, post_id: post.id) %>
+<% if like.nil? %>
+<%= render 'forms/like', like: @like %>
+<% end %>
+<% end%>

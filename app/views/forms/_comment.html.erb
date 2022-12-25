@@ -1,0 +1,8 @@
+<%= form_with model: comment do |form| %>
+  <div class="text">
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+  <%= form.hidden_field :post_id, value: params[:id] %>
+  <%= form.submit "Comment" %>
+<% end %>
