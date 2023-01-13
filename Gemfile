@@ -74,4 +74,7 @@ end
 group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-end
+end 
+
+gem 'bullet', group: 'development'
+
