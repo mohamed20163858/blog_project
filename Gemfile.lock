@@ -269,13 +269,13 @@ DEPENDENCIES
   rails-controller-testing
   rspec-rails
   rubocop (>= 1.0, < 2.0)
-  selenium-webdriver
+  selenium-webdriver (~> 4.7, >= 4.7.1)
   sprockets-rails
   stimulus-rails
   turbo-rails
   tzinfo-data
   web-console
-  webdrivers
+  webdrivers (~> 5.2)
 
 RUBY VERSION
    ruby 3.1.2p20
