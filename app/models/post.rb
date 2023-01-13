@@ -4,11 +4,11 @@ class Post < ApplicationRecord
   belongs_to :author, class_name: 'User', foreign_key: :author_id
   after_save :update_posts_counter
 
-  validates :title, presence: true, length: { minimum: 3, maximum: 250 }
-  validates :comments_counter, presence: true, comparison: { greater_than_or_equal_to: 0 },
-                               numericality: { only_integer: true }
-  validates :likes_counter, presence: true, comparison: { greater_than_or_equal_to: 0 },
-                            numericality: { only_integer: true }
+  # validates :title, presence: true, length: { minimum: 3, maximum: 250 }
+  # validates :comments_counter, presence: true, comparison: { greater_than_or_equal_to: 0 },
+  #                              numericality: { only_integer: true }
+  # validates :likes_counter, presence: true, comparison: { greater_than_or_equal_to: 0 },
+  #                           numericality: { only_integer: true }
   def check_last_five_comments
     comments.order(created_at: :desc).limit(5)
   end
