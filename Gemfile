@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.1.3'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.4'
@@ -11,7 +11,7 @@ gem 'sprockets-rails'
 
 gem 'racc', '~> 1.6.1'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
@@ -68,14 +68,12 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  
 end
 group :development, :test do
+  gem 'capybara'
   gem 'rails-controller-testing'
   gem 'rspec-rails'
-  gem 'capybara'
   gem 'selenium-webdriver', '~> 4.7', '>= 4.7.1'
   gem 'webdrivers', '~> 5.2'
-end 
+end
 gem 'bullet', group: 'development'
-
