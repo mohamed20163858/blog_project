@@ -21,38 +21,38 @@ RSpec.describe 'User post show page Capybara integration test', type: :system do
     @first_user = User.first
     @first_post = first_user.posts.first
   end
-  it "test seeing the post title" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the post title' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
     expect(page).to have_content(@first_post.title.to_s)
   end
-  it "test seeing the name of the post writer " do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the name of the post writer ' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
     expect(page).to have_content(@first_post.author.name.to_s)
   end
-  it "test seeing the number of comments it has" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the number of comments it has' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
-    expect(page).to have_content("Comments: " + @first_post.comments_counter.to_s)
+    expect(page).to have_content("Comments: #{@first_post.comments_counter}")
   end
-  it "test seeing the number of likes it has" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the number of likes it has' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
-    expect(page).to have_content("Likes: " + @first_post.likes_counter.to_s)
+    expect(page).to have_content("Likes: #{@first_post.likes_counter}")
   end
-  it "test seeing the post body" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the post body' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
     expect(page).to have_content(@first_post.text.to_s)
   end
-  it "test seeing the username of a random commentor" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the username of a random commentor' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
     expect(page).to have_content(@first_post.comments.first.author.name.to_s)
   end
-  it "test seeing the comment of a random commentor" do
-    visit '/users/' + @first_user.id.to_s + '/posts/' +  @first_post.id.to_s
+  it 'test seeing the comment of a random commentor' do
+    visit "/users/#{@first_user.id}/posts/#{@first_post.id}"
     sleep(1)
     expect(page).to have_content(@first_post.comments.first.text.to_s)
   end
