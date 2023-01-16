@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe 'User show page Capybara integration test', type: :system do
+RSpec.describe 'User post index page Capybara integration test', type: :system do
   before :all do
     Comment.destroy_all
     Post.destroy_all
@@ -17,73 +17,80 @@ RSpec.describe 'User show page Capybara integration test', type: :system do
     Comment.create(post: forth_post, author: first_user, text: 'Brilliant Lilly!')
     Comment.create(post: first_post, author: first_user, text: 'Thanks Lilly!')
     Comment.create(post: second_post, author: first_user, text: 'Thanks Lilly!')
+    Like.create(post: first_post, author: first_user)
   end
-  it "test seeing the  the user's profile picture" do
+  it "test seeing the user's profile picture" do
     first_user = User.first
-    visit '/users/' + first_user.id.to_s
+    visit '/users/' + first_user.id.to_s + '/posts'
     sleep(1)
     expect(page).to have_css("img[src*='https://i.ibb.co/CP4m1b4/img.jpg']")
   end
-  it "test seeing the  the user username" do
+  it "test seeing the user username" do
     first_user = User.first
-    visit '/users/' + first_user.id.to_s
+    visit '/users/' + first_user.id.to_s + '/posts'
     sleep(1)
     expect(page).to have_content('User name: ' + first_user.name.to_s)
   end
-  it "test seeing the  the user number of posts" do
+  it "test seeing the user number of posts" do
     first_user = User.first
     number_of_posts = first_user.posts_counter
-    visit '/users/' + first_user.id.to_s
+    visit '/users/' + first_user.id.to_s + '/posts'
     sleep(1)
     expect(page).to have_content('Number of posts: ' + number_of_posts.to_s)
   end
-  it "test seeing the  the user bio" do
+  it "test seeing the user post title " do
     first_user = User.first
-    bio = first_user.bio
-    visit '/users/' + first_user.id.to_s
+    post_title = first_user.posts.first.title
+    visit '/users/' + first_user.id.to_s + '/posts'
+    click_button('Pagination')
     sleep(1)
-    expect(page).to have_content(bio.to_s)
+    expect(page).to have_content(post_title.to_s)
   end
-  it "test seeing the  the user first post" do
+  it "test seeing the user post body" do
     first_user = User.first
-    post_1_text = first_user.posts.first.text
-    visit '/users/' + first_user.id.to_s
+    post_body = first_user.posts.first.text
+    visit '/users/' + first_user.id.to_s + '/posts'
+    click_button('Pagination')
     sleep(1)
-    expect(page).to have_content(post_1_text.to_s)
+    expect(page).to have_content(post_body.to_s)
   end
-  it "test seeing the  the user second post" do
+  it "test seeing the user post first comment" do
     first_user = User.first
-    post_2_text = first_user.posts.first(2)[1].text
-    visit '/users/' + first_user.id.to_s
+    post_first_comment = first_user.posts.first.comments.first.text
+    visit '/users/' + first_user.id.to_s + '/posts'
+    click_button('Pagination')
     sleep(1)
-    expect(page).to have_content(post_2_text.to_s)
+    expect(page).to have_content(post_first_comment.to_s)
   end
-  it "test seeing the  the user third post" do
+  it "test seeing the number of comments in a certain post" do
     first_user = User.first
-    post_3_text = first_user.posts.first(3)[2].text
-    visit '/users/' + first_user.id.to_s
+    number_of_comments = first_user.posts.first.comments_counter
+    visit '/users/' + first_user.id.to_s + '/posts'
     sleep(1)
-    expect(page).to have_content(post_3_text.to_s)
+    expect(page).to have_content('Comments: ' + number_of_comments.to_s)
   end
-  it "test seeing the see all posts button inside user show page" do
+  it "test seeing the number of likes in a certain post" do
     first_user = User.first
-    visit '/users/' + first_user.id.to_s
+    number_of_likes = first_user.posts.first.likes_counter
+    visit '/users/' + first_user.id.to_s + '/posts'
+    click_button('Pagination')
     sleep(1)
-    expect(page).to have_button('See all posts')
+    expect(page).to have_content('Likes: ' + number_of_likes.to_s)
+  end
+  it "test the functionality of  pagination button " do
+    first_user = User.first
+    post_3_title = first_user.posts.first(3)[2].title
+    visit '/users/' + first_user.id.to_s + '/posts'
+    click_button('Pagination')
+    sleep(1)
+    expect(page).to have_content(post_3_title.to_s)
   end
   it "test redirecting to that post's show page" do
     first_user = User.first
-    visit '/users/' + first_user.id.to_s
+    visit '/users/' + first_user.id.to_s + '/posts'
     sleep(1)
     id = page.find_all('.post')[0][:id]
     page.find_all('.post')[0].click
     expect(page).to have_current_path("/users/#{first_user.id}/posts/#{id}")
-  end
-  it "test redirecting to that post's index page when clicking see all posts button" do
-    first_user = User.first
-    visit '/users/' + first_user.id.to_s
-    sleep(1)
-    click_button('See all posts')
-    expect(page).to have_current_path("/users/#{first_user.id}/posts")
   end
 end

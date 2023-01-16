@@ -66,6 +66,13 @@
   display: none;
 }
 
-.post .reactions {
-  align-self: flex-end;
+.post .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-post {
+  padding: 10px;
+  margin-left: 48%;
 }

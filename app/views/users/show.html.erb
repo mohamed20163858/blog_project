@@ -15,7 +15,7 @@
   </div>
   <% Post.all.each_with_index do |post, i| %>
   <% if user.id == post.author_id %>
-    <div class="post" id="<%=post.id%>">
+    <div class="post" id="<%=post.id%>" onclick="visitPostPage(<%=post.id%>)">
     <h2><%= post.title %></h2>
     <p><%= post.text %></p>
     <p class="reactions">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p>
@@ -35,5 +35,8 @@
   }
   function createPostFunction(id) {
     window.location.href = "/posts/new"
+  }
+  function visitPostPage(id) { 
+    window.location.href += "/posts/"+id
   }
 </script>
