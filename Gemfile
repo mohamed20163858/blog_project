@@ -77,3 +77,4 @@ group :development, :test do
   gem 'webdrivers', '~> 5.2'
 end
 gem 'bullet', group: 'development'
+gem 'devise'

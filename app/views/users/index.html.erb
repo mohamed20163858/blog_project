@@ -1,3 +1,4 @@
+
 <% User.all.each do |user| %>
 <div id="u<%= user.id %>" class="card" onclick="redirectFunction(<%= user.id %>)">
   <div class="img"><%= image_tag "https://i.ibb.co/CP4m1b4/img.jpg", alt: "user-photo", height:150 %></div>
