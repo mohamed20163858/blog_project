@@ -58,6 +58,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_203626) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["comment_id"], name: "index_users_on_comment_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["like_id"], name: "index_users_on_like_id"

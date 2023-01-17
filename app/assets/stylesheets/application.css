@@ -94,3 +94,13 @@ nav a {
   list-style: none;
   display: flex;
 }
+
+.notice {
+  background-color: green;
+  color: white;
+}
+
+.alert {
+  background-color: red;
+  color: white;
+}
