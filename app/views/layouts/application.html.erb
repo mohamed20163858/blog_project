@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+  <%= render 'head/header'%>
+  <p class="notice"><%= notice if notice %></p>
+  <p class="alert"><%= alert if alert %></p>
+  <%= yield %>
   </body>
 </html>

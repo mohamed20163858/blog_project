@@ -1,5 +1,5 @@
 
-<% User.all.each do |user| %>
+<% User.includes(:posts).each do |user| %>
 <% if user.id == params[:id].to_i %>
 <div id="<%=params[:id]%>" class="card">
   <div class="img"><%= image_tag "https://i.ibb.co/CP4m1b4/img.jpg", alt: "user-photo", height:150 %></div>
@@ -9,9 +9,9 @@
   </div>
 </div>
 <div class="posts">
-  <% Post.all.each_with_index do |post, i| %>
+  <% user.posts.first(2).each do |post| %>
   <% if user.id == post.author_id %>
-    <div class="post" id="<%=post.id%>">
+    <div class="post" id="<%=post.id%>" onclick="seePostFunction(<%=post.id%>)">
     <h2><%= post.title %></h2>
     <p><%= post.text %></p>
     <p class="reactions">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p>
@@ -23,14 +23,43 @@
       <% end %>
       <% end %>
     </div>
-    <button onclick="seePostFunction(<%=user.id%>, <%=post.id%>)">Pagination</button>
   <% end %>
   <% end %>
+  <button onclick="expandPage()">Pagination</button>
 </div>
 <% end %>
 <% end %>
+
 <script>
-  function seePostFunction(user_id, post_id) {
-     window.location.href = "posts/"+post_id;
+  function seePostFunction(post_id) {
+     window.location.href = "posts/" + post_id;
+  }
+  function expandPage () {
+    button = document.querySelector('button');
+    button.remove();
+    posts = document.querySelector('.posts');
+    posts.innerHTML += `
+    <% User.all.each do |user| %>
+    <% if user.id == params[:id].to_i %>
+    <% user.posts.each_with_index do |post, i| %>
+    <% if user.id == post.author_id && i > 1 %>
+    <div class="post" id="<%=post.id%>" onclick="seePostFunction(<%=post.id%>)">
+    <h2><%= post.title %></h2>
+    <p><%= post.text %></p>
+    <p class="reactions">Comments: <%= post.comments_counter %>, Likes: <%= post.likes_counter %></p>
+    </div>
+    <div class="comments">
+      <% Comment.all.each do |comment| %>
+      <%if comment.post_id == post.id %>
+        <p><%= User.find_by(id:comment.author_id).name%>: <%= comment.text %></p>
+      <% end %>
+      <% end %>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
+    <% end %>
+    `
+    console.log(posts);
   }
 </script>
