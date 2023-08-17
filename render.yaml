@@ -1,7 +1,7 @@
 databases:
   - name: rails-blog
-    databaseName: rails-blog
-    user: mohamed-saleh
+    databaseName: rails_blog
+    user: mohamed_saleh
 
 services:
   - type: web
